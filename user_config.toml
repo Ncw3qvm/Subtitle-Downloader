@@ -66,6 +66,9 @@ cookies = 'wetv.vip_cookies.txt'
 [credentials.YouTube]
 cookies = 'www.youtube.com_cookies.txt'
 
+[credentials.LineTV]
+access_token = ''
+
 [proxies]
 # This is a dictionary of proxies you wish to use on services that require a specific country IP.
 # The dictionary key needs to be an alpha 2 country code (2-letter code, e.g. `us`, `gb`, `jp`, `de`).
