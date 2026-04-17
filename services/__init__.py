@@ -24,6 +24,7 @@ from services.hbogoasia import HBOGOAsia
 from services.itunes import iTunes
 from services.appletvplus import AppleTVPlus
 from services.youtube import YouTube
+from services.ondemandchina import ODC
 
 service_map = [
     {
@@ -115,5 +116,10 @@ service_map = [
         'name': Service.YOUTUBE,
         'class': YouTube,
         'domain': 'youtube.com'
+    },
+    {
+        'name': Service.ODC,
+        'class': ODC,
+        'domain': 'ondemandchina.com'
     }
 ]

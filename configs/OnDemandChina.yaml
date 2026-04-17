@@ -1,0 +1,6 @@
+credentials = ''
+required = ''
+
+[api]
+titles = 'https://odkmedia.io/odc/api/v1/program/{slug}/'
+playback = 'https://odkmedia.io/odc/api/v2/playback/{video_id}/'

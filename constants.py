@@ -30,6 +30,7 @@ class Service:
     VIU = 'Viu'
     WETV = 'WeTV'
     YOUTUBE = 'YouTube'
+    ODC = 'OnDemandChina'
 
 
 SUBTITLE_FORMAT = ['.srt', '.ass', '.ssa', '.vtt', '.xml']
