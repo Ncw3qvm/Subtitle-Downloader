@@ -50,8 +50,11 @@ class ODC(BaseService):
         return playback_response.json().get('text_tracks', [])
 
     def collect_preferred_subtitles(self, tracks, name_prefix, folder_path):
-        srt_subtitles = []
-        vtt_subtitles = []
+        subtitles_by_type = {
+            '.srt': [],
+            '.vtt': [],
+            '.ass': []
+        }
 
         for track in tracks:
             track_url = track.get('url') or track.get('src')
@@ -59,29 +62,29 @@ class ODC(BaseService):
                 continue
 
             codec = (track.get('codec') or '').lower()
-            url_lower = track_url.lower()
+            track_url_lower = track_url.lower()
 
-            extension = ''
-            if 'srt' in codec or '.srt' in url_lower:
+            if 'srt' in codec or '.srt' in track_url_lower:
                 extension = '.srt'
-            elif 'vtt' in codec or '.vtt' in url_lower:
+            elif 'vtt' in codec or '.vtt' in track_url_lower:
                 extension = '.vtt'
+            elif 'ass' in codec or '.ass' in track_url_lower:
+                extension = '.ass'
             else:
                 continue
 
             language = track.get('language', 'und')
-            subtitle = {
+            subtitles_by_type[extension].append({
                 'name': f'{name_prefix}.{language}{extension}',
                 'path': folder_path,
                 'url': track_url
-            }
+            })
 
-            if extension == '.srt':
-                srt_subtitles.append(subtitle)
-            else:
-                vtt_subtitles.append(subtitle)
-
-        return srt_subtitles or vtt_subtitles
+        return (
+            subtitles_by_type['.srt']
+            or subtitles_by_type['.vtt']
+            or subtitles_by_type['.ass']
+        )
 
     def movie_metadata(self, title, release_year):
         self.logger.info("\n%s (%s)", title, release_year)
